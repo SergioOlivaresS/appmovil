@@ -12,6 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gasteando"
         tools:targetApi="31">
+
+        <activity
+            android:name=".ingresarproductos"
+            android:exported="false" />
+        <activity
+            android:name=".Categoria"
+            android:exported="false" />
+        <activity
+            android:name=".Resumen"
+            android:exported="false" />
         <activity
             android:name=".MenuPrincipal"
             android:exported="false" />

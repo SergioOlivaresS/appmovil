@@ -1,10 +1,13 @@
 package com.example.gasteando;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -22,19 +25,23 @@ public class MenuPrincipal extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 //codificar tap al tocar
                 int position = tab.getPosition();
+
                 switch (position) {
                     case 0:
-                        //llamar al fragmento resumen
-                        Toast.makeText(getApplicationContext(),"resumen gastos" , Toast.LENGTH_SHORT).show();
+                        // Volver a la ventana principal
+                        Intent f = new Intent(MenuPrincipal.this, MenuPrincipal.class);
+                        startActivity(f);
                         break;
-                    case 1:
-                        // volver al menu
-                        Toast.makeText(getApplicationContext(),"menu" , Toast.LENGTH_SHORT).show();
 
+                    case 1:
+                        //llamar al fragmento resumen
+                        Resumen r = new Resumen();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, r).commit();
                         break;
                     case 2:
                         // llamar a categoria
-                        Toast.makeText(getApplicationContext(),"categoria" , Toast.LENGTH_SHORT).show();
+                        Categoria c = new Categoria();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, c).commit();
 
                         break;
 
@@ -57,13 +64,18 @@ public class MenuPrincipal extends AppCompatActivity {
 
     }
 
-    private void setSupportActionBar() {
+    public void ingresarproductos(View v){
+        Intent producto = new Intent(this, ingresarproductos.class);
+        startActivity(producto);
     }
 
+    private void setSupportActionBar() {
+    }
 
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         return super.onCreateOptionsMenu(menu);
     }
+
 }
