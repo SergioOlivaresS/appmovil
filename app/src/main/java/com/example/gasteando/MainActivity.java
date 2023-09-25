@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class Login extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class Login extends AppCompatActivity {
 
         if(correo.equals("c1") && contrasenia.equals("123")){
 
-            Intent i = new Intent(this, Menu.class);
+            Intent i = new Intent(this, MenuPrincipal.class);
             startActivity(i);
 
         }else{

@@ -14,7 +14,7 @@ public class Registro extends AppCompatActivity {
         setContentView(R.layout.activity_registro);
     }
     public void registrado(View v) {
-        Intent i = new Intent(this, Login.class);
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 }
