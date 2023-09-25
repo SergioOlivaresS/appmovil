@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Gasteando</string>
+    <string name="correo">Correo</string>
+    <string name="contrasenia">Contraseña</string>
+    <string name="BtnIngresar">Ingresar</string>
+    <string name="BtnRegistrarse">Registrarse</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="confirmarContrasenia">Confirmar Contraseña</string>
+    <string name="crearCuenta">Crear Cuenta</string>
+    <string name="OlvidarContrasenia">¿Olvidaste tu constraseña?</string>
+    <string name="menu">Menu</string>
+    <string name="resumengastos">Resumen Gastos</string>
+    <string name="categoria">Categorias</string>
+    <string name="acepto_terminos_y_condiciones">Acepto terminos y condiciones</string>
+    <string name="registrate">Registrate</string>
+    <string name="todo">TODO</string>
+    <string name="toolbar">Toolbar</string>
+    <string name="bottombar">Bottombar</string>
+
+
+</resources>
