@@ -77,6 +77,11 @@ public class MenuPrincipal extends AppCompatActivity {
         startActivity(menuacalendario);
     }
 
+    public void comparador(View v){
+        Intent comparador = new Intent(this, CompararGastos.class);
+        startActivity(comparador);
+    }
+
 
     private void setSupportActionBar() {
     }

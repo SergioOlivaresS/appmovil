@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".CompararGastos">
+
+    <!-- Selector de Categorías -->
+    <Spinner
+        android:id="@+id/spinnerCategorias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:hint="@string/seleccionaunacategoria"
+        android:minHeight="48dp" />
+
+    <!-- Selector de Fechas de Inicio y Fin -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/etFechaInicio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:focusable="false"
+            android:hint="@string/fechadeinicio"
+            android:inputType="none"
+            android:onClick="mostrarDatePickerInicio"
+            android:textColorHint="#8D6E63"
+            tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize"
+            android:autofillHints="" />
+
+        <EditText
+            android:id="@+id/etFechaFin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:focusable="false"
+            android:hint="@string/fechadefin"
+            android:inputType="none"
+            android:onClick="mostrarDatePickerFin"
+            android:textColorHint="#8D6E63"
+            tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize"
+            android:autofillHints="" />
+    </LinearLayout>
+
+    <!-- Botón para Mostrar Datos -->
+    <Button
+        android:id="@+id/btnMostrarDatos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/mostrardatos" />
+
+    <!-- Resultados (puede ser un RecyclerView u otro elemento) -->
+    <TextView
+        android:id="@+id/tvResultados"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>
