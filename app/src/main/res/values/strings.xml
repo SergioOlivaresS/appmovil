@@ -22,9 +22,14 @@
     <string name="entretencion">Entretención</string>
     <string name="otro">Otro</string>
     <string name="ingresarproducto">Ingresar Productos</string>
-<string name="btningresar">Ingresar</string>
+    <string name="btningresar">Ingresar</string>
     <string name="cancelar">Cancelar</string>
     <string name="detalle">Detalle</string>
     <string name="selecciona_una_fecha">Selecciona una fecha</string>
     <string name="monto">Monto</string>
+    <string name="agregarproductos">Agregar Mas Productos</string>
+    <string name="editarproductos">Editar Productos</string>
+    <string name="gastosrealizados">Gastos Realizados</string>
+    <string name="ingresarproductos">Ingresar Productos</string>
+    <string name="verproductosingresados">Ver productos ingresados</string>
 </resources>

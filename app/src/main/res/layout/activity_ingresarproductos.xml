@@ -1,63 +1,15 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/etDetalle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="-1dp"
-        android:layout_marginTop="114dp"
-        android:autofillHints=""
-        android:hint="@string/detalle"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:textColorHint="#8D6E63"
-        tools:ignore="VisualLintTextFieldSize,VisualLintBounds" />
-
-    <EditText
-        android:id="@+id/etMonto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etDetalle"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="118dp"
-        android:layout_marginEnd="-1dp"
-        android:hint="@string/monto"
-        android:inputType="numberDecimal"
-        android:minHeight="48dp"
-        tools:ignore="VisualLintTextFieldSize,VisualLintBounds"
-        android:autofillHints="" />
-
-    <Spinner
-        android:id="@+id/spinnerCategoria"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etMonto"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="-127dp"
-        android:layout_marginEnd="-2dp"
-        android:minHeight="48dp"
-        tools:ignore="VisualLintBounds" />
-
-    <EditText
         android:id="@+id/etFecha"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="-1dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginTop="112dp"
         android:autofillHints=""
         android:focusable="false"
         android:hint="@string/selecciona_una_fecha"
@@ -65,31 +17,98 @@
         android:minHeight="48dp"
         android:onClick="mostrarDatePicker"
         android:textColorHint="#8D6E63"
-        tools:ignore="VisualLintTextFieldSize,VisualLintBounds"
-        tools:text="@tools:sample/date/ddmmyy" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="VisualLintTextFieldSize,VisualLintBounds" />
+
+    <EditText
+        android:id="@+id/etMonto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:autofillHints=""
+        android:hint="@string/monto"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCategoria"
+        tools:ignore="VisualLintTextFieldSize,VisualLintBounds" />
+
+    <Spinner
+        android:id="@+id/spinnerCategoria"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etDetalle"
+        tools:ignore="VisualLintBounds" />
 
     <Button
         android:id="@+id/btnIngresar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="297dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="13dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="12dp"
+        android:onClick="ingresarproductos"
         android:text="@string/BtnIngresar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etMonto"
         tools:ignore="VisualLintButtonSize" />
 
     <Button
         android:id="@+id/btnCancelar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnIngresar"
-        android:layout_alignParentStart="true"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="159dp"
-        android:layout_marginTop="-48dp"
-        android:text="@string/cancelar" />
+        android:layout_marginTop="24dp"
+        android:text="@string/cancelar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etMonto" />
 
-</RelativeLayout>
+    <EditText
+        android:id="@+id/etDetalle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:autofillHints=""
+        android:hint="@string/detalle"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:textColorHint="#8D6E63"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etFecha"
+        tools:ignore="VisualLintTextFieldSize,VisualLintBounds" />
+
+    <TextView
+        android:id="@+id/txtingresarproductos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/ingresarproductos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/verproductos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="140dp"
+        android:onClick="ingresoagasto"
+        android:text="@string/verproductosingresados"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

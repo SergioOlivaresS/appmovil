@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".GastoRealizado">
+
+    <EditText
+        android:id="@+id/etFecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="2dp"
+        android:autofillHints=""
+        android:focusable="false"
+        android:hint="@string/selecciona_una_fecha"
+        android:inputType="datetime"
+        android:minHeight="48dp"
+        android:onClick="mostrarDatePicker"
+        android:textColorHint="#8D6E63"
+        tools:ignore="VisualLintTextFieldSize,VisualLintBounds"
+        tools:text="@tools:sample/date/ddmmyy" />
+
+    <!-- Combina el Spinner con el total -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <Spinner
+            android:id="@+id/spinnerCategoria"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <TextView
+            android:id="@+id/txtTotalGastos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnAgregarProducto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:onClick="volveraingreso"
+        android:text="@string/agregarproductos" />
+
+    <Button
+        android:id="@+id/btnEditarProducto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:text="@string/editarproductos" />
+
+    <!-- Aquí puedes agregar un RecyclerView u otros elementos para mostrar la lista de gastos -->
+
+</LinearLayout>

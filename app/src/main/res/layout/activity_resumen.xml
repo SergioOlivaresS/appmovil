@@ -13,7 +13,8 @@
         android:layout_marginStart="16dp"
         android:text="@string/resumengastos"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="35dp" />
+        tools:layout_editor_absoluteY="35dp"
+        tools:ignore="MissingConstraints" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -23,6 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="143dp" />
+        tools:layout_editor_absoluteY="143dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

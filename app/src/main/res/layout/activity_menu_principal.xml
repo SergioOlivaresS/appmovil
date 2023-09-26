@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".MenuPrincipal">
 
+    <Button
+        android:id="@+id/ingresarproductos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:onClick="ingresarproductos"
+        android:text="@string/ingresarproducto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
     <include
         android:id="@+id/include3"
         layout="@layout/bottombar"
@@ -13,42 +26,20 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="VisualLintBounds" />
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/toolbar"
+    <Button
+        android:id="@+id/gastorealizado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/contenedor"
+        android:layout_marginTop="76dp"
+        android:onClick="gastorealizado"
+        android:text="@string/gastosrealizados"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <FrameLayout
-        android:id="@+id/contenedor"
-        android:layout_width="411dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="75dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include"
-        tools:ignore="UselessLeaf" >
-
-        <Button
-            android:id="@+id/ingresarproductos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:onClick="ingresarproductos"
-            android:text="@string/ingresarproducto"
-            app:layout_constraintStart_toStartOf="parent" />
-    </FrameLayout>
+        app:layout_constraintTop_toBottomOf="@+id/ingresarproductos"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

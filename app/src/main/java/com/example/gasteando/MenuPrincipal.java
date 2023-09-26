@@ -4,10 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -35,17 +33,17 @@ public class MenuPrincipal extends AppCompatActivity {
 
                     case 1:
                         //llamar al fragmento resumen
-                        Resumen r = new Resumen();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, r).commit();
+                        Intent Resumen = new Intent(MenuPrincipal.this, Resumen.class);
+                        startActivity(Resumen);
                         break;
                     case 2:
                         // llamar a categoria
-                        Categoria c = new Categoria();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, c).commit();
-
+                        Intent Categoria = new Intent(MenuPrincipal.this, Categoria.class);
+                        startActivity(Categoria);
                         break;
 
                 }
+                tl.getTabAt(position).select();
 
             }
 
@@ -68,6 +66,12 @@ public class MenuPrincipal extends AppCompatActivity {
         Intent producto = new Intent(this, ingresarproductos.class);
         startActivity(producto);
     }
+
+    public void gastorealizado(View v){
+        Intent gasto = new Intent(this, GastoRealizado.class);
+        startActivity(gasto);
+    }
+
 
     private void setSupportActionBar() {
     }
