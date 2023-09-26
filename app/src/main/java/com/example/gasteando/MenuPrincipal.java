@@ -72,6 +72,11 @@ public class MenuPrincipal extends AppCompatActivity {
         startActivity(gasto);
     }
 
+    public void calendario(View v){
+        Intent menuacalendario = new Intent(this, Calendario.class);
+        startActivity(menuacalendario);
+    }
+
 
     private void setSupportActionBar() {
     }

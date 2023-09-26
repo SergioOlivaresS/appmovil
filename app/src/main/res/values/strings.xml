@@ -32,4 +32,5 @@
     <string name="gastosrealizados">Gastos Realizados</string>
     <string name="ingresarproductos">Ingresar Productos</string>
     <string name="verproductosingresados">Ver productos ingresados</string>
+    <string name="calendario">Calendario</string>
 </resources>
