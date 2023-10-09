@@ -6,55 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".MenuPrincipal">
 
-    <Button
-        android:id="@+id/ingresarproductos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:onClick="ingresarproductos"
-        android:text="@string/ingresarproducto"
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar"
+        android:layout_width="415dp"
+        android:layout_height="55dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/gastorealizado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:onClick="gastorealizado"
-        android:text="@string/gastosrealizados"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingresarproductos"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/calendario"
-        android:layout_width="164dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="60dp"
-        android:onClick="calendario"
-        android:text="@string/calendario"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gastorealizado"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/comparargastos"
-        android:layout_width="162dp"
-        android:layout_height="48dp"
-        android:onClick="comparador"
-        android:text="@string/comparargastos"
+    <include
+        android:id="@+id/include2"
+        layout="@layout/bottombar"
+        android:layout_width="412dp"
+        android:layout_height="76dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendario"
-        app:layout_constraintVertical_bias="0.184" />
+        tools:ignore="VisualLintBounds" />
+
+
+    <FrameLayout
+        android:id="@+id/contenedor"
+        android:layout_width="412dp"
+        android:layout_height="603dp"
+        app:layout_constraintBottom_toTopOf="@+id/include2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include"
+        tools:ignore="VisualLintBounds">
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

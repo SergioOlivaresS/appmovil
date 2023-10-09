@@ -1,42 +1,53 @@
 package com.example.gasteando;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class CompararGastos extends AppCompatActivity {
+public class CompararGastosFG extends Fragment {
 
     private Spinner spinnerCategorias;
-    private EditText etFechaInicio, etFechaFin;
+    private EditText etFechaInicio;
+    private EditText etFechaFin;
     private TextView tvResultados;
 
     private Calendar fechaInicio, fechaFin;
 
+    public CompararGastosFG() {
+        // Required empty public constructor
+    }
+
+    @SuppressLint("MissingInflatedId")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_comparar_gastos);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_comparar_gastos_f_g, container, false);
 
         // Inicializar vistas
-        spinnerCategorias = findViewById(R.id.spinnerCategorias);
-        etFechaInicio = findViewById(R.id.etFechaInicio);
-        etFechaFin = findViewById(R.id.etFechaFin);
-        Button btnMostrarDatos = findViewById(R.id.btnMostrarDatos);
-        tvResultados = findViewById(R.id.tvResultados);
+        spinnerCategorias = rootView.findViewById(R.id.spinnerCategorias);
+        etFechaInicio = rootView.findViewById(R.id.etFechaInicio);
+        etFechaFin = rootView.findViewById(R.id.etFechaFin);
+        Button btnMostrarDatos = rootView.findViewById(R.id.btnMostrarDatos);
+        tvResultados = rootView.findViewById(R.id.tvResultados);
 
         // Configurar el Spinner con opciones de categoría
         String[] categorias = {"Total", "Alimentación", "Transporte", "Entretenimiento", "Otro"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categorias);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, categorias);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCategorias.setAdapter(adapter);
 
@@ -53,12 +64,14 @@ public class CompararGastos extends AppCompatActivity {
         fechaInicio = Calendar.getInstance();
         fechaFin = Calendar.getInstance();
         updateFechaEditTexts();
+
+        return rootView;
     }
 
     // Método para mostrar el DatePickerDialog de la fecha de inicio
     private void mostrarDatePickerInicio() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
-                this, (view, year, month, dayOfMonth) -> {
+                requireContext(), (view, year, month, dayOfMonth) -> {
             fechaInicio.set(year, month, dayOfMonth);
             updateFechaEditTexts();
         },
@@ -72,7 +85,7 @@ public class CompararGastos extends AppCompatActivity {
     // Método para mostrar el DatePickerDialog de la fecha de fin
     private void mostrarDatePickerFin() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
-                this, (view, year, month, dayOfMonth) -> {
+                requireContext(), (view, year, month, dayOfMonth) -> {
             fechaFin.set(year, month, dayOfMonth);
             updateFechaEditTexts();
         },
@@ -100,9 +113,9 @@ public class CompararGastos extends AppCompatActivity {
         String fechaFinSeleccionada = etFechaFin.getText().toString();
 
         // Realizar alguna acción con las selecciones
-        String resultado = "Categoría: " + categoriaSeleccionada + "\n"
-                + "Dia " + fechaInicioSeleccionada + "\n"
-                + "Dia " + fechaFinSeleccionada;
+        String resultado = "Categoría: " + categoriaSeleccionada +  "\n"
+                + "Día " + fechaInicioSeleccionada + "\n"
+                + "Día  " + fechaFinSeleccionada;
 
         tvResultados.setText(resultado);
     }

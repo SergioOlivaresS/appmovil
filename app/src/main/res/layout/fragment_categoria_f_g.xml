@@ -5,10 +5,47 @@
     android:layout_height="match_parent"
     tools:context=".CategoriaFG">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/alimentacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="150dp"
+        android:text="@string/alimentacion" />
 
+    <TextView
+        android:id="@+id/entretencion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="250dp"
+        android:text="@string/entretencion"
+        tools:ignore="VisualLintOverlap" />
+
+    <TextView
+        android:id="@+id/transporte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="350dp"
+        android:text="@string/transporte" />
+
+    <TextView
+        android:id="@+id/otro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="450dp"
+        android:text="@string/otro" />
+
+    <TextView
+        android:id="@+id/categoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/categoria"
+        android:textColor="#FFFCFC"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="32dp" />
 </FrameLayout>

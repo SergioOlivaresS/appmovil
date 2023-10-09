@@ -1,23 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/CompararGastosFG"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".CompararGastos">
+    tools:context=".CompararGastosFG"
+    tools:ignore="ExtraText">
 
-    <!-- Selector de Categorías -->
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/comparargastotl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/comparar_gastosFG"
+        android:textColor="#FFFFFF" />
+
     <Spinner
         android:id="@+id/spinnerCategorias"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:layout_marginBottom="16dp"
-        android:hint="@string/seleccionaunacategoria"
         android:minHeight="48dp" />
+    android:hint="@string/seleccionaunacategoria"
+    android:minHeight="48dp" />
 
     <!-- Selector de Fechas de Inicio y Fin -->
+
+    <!-- Botón para Mostrar Datos -->
+
+    <!-- Resultados (puede ser un RecyclerView u otro elemento) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,44 +40,47 @@
 
         <EditText
             android:id="@+id/etFechaInicio"
-            android:layout_width="0dp"
+            android:layout_width="1dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="180dp"
             android:layout_weight="1"
+            android:autofillHints=""
             android:focusable="false"
             android:hint="@string/fechadeinicio"
             android:inputType="none"
+            android:minHeight="48dp"
             android:onClick="mostrarDatePickerInicio"
-            android:textColorHint="#8D6E63"
-            tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize"
-            android:autofillHints="" />
+            tools:ignore="VisualLintTextFieldSize" />
+        tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize"
+        android:autofillHints="" />
 
         <EditText
             android:id="@+id/etFechaFin"
-            android:layout_width="0dp"
+            android:layout_width="22dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="180dp"
             android:layout_weight="1"
+            android:autofillHints=""
             android:focusable="false"
             android:hint="@string/fechadefin"
             android:inputType="none"
             android:onClick="mostrarDatePickerFin"
-            android:textColorHint="#8D6E63"
-            tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize"
-            android:autofillHints="" />
+            tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize" />
+        android:autofillHints="" />
     </LinearLayout>
 
-    <!-- Botón para Mostrar Datos -->
     <Button
         android:id="@+id/btnMostrarDatos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="70dp"
         android:text="@string/mostrardatos" />
 
-    <!-- Resultados (puede ser un RecyclerView u otro elemento) -->
     <TextView
         android:id="@+id/tvResultados"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp" />
+        android:layout_height="58dp"
+        android:layout_marginTop="270dp" />
 
-</LinearLayout>
+</FrameLayout>

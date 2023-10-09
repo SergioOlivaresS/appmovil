@@ -30,7 +30,6 @@
         android:ems="10"
         android:hint="@string/contrasenia"
         android:inputType="textPassword"
-        android:textColorHint="#8D6E63"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="DuplicateSpeakableTextCheck" />
@@ -48,14 +47,13 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10"
-        app:layout_constraintVertical_bias="0.202"
+        app:layout_constraintVertical_bias="0.183"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/crearcuenta"
-        android:layout_width="98dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="164dp"
+        android:layout_width="104dp"
+        android:layout_height="22dp"
         android:layout_marginBottom="79dp"
         android:clickable="true"
         android:focusable="true"
@@ -63,10 +61,11 @@
         android:onClick="crearCuenta"
         android:text="@string/crearCuenta"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.88"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints,TextSizeCheck" />
 
     <TextView
         android:id="@+id/textView8"

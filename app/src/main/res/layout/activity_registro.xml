@@ -8,16 +8,15 @@
 
     <EditText
         android:id="@+id/editTextText"
-        android:layout_width="213dp"
+        android:layout_width="365dp"
         android:layout_height="48dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="80dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/nombre"
         android:inputType="text"
         android:text=""
-        android:textColorHint="#8D6E63"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,14 +45,14 @@
 
     <EditText
         android:id="@+id/editTextTextEmailAddress2"
-        android:layout_width="0dp"
+        android:layout_width="364dp"
         android:layout_height="48dp"
         android:layout_marginTop="272dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/correo"
         android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword3"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextText"
         app:layout_constraintTop_toTopOf="parent"
@@ -61,9 +60,9 @@
 
     <EditText
         android:id="@+id/editTextTextPassword3"
-        android:layout_width="0dp"
+        android:layout_width="369dp"
         android:layout_height="48dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="364dp"
         android:autofillHints=""
         android:ems="10"
@@ -71,7 +70,7 @@
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TextContrastCheck" />
+        tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
     <TextView
         android:id="@+id/textView6"
@@ -110,7 +109,7 @@
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="524dp"
         android:text="@string/acepto_terminos_y_condiciones"
         app:layout_constraintStart_toStartOf="parent"
@@ -120,7 +119,7 @@
         android:id="@+id/editTextTextPassword2"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginTop="460dp"
+        android:layout_marginTop="464dp"
         android:layout_marginEnd="1dp"
         android:ems="10"
         android:hint="@string/confirmarContrasenia"
@@ -136,8 +135,8 @@
         android:id="@+id/button4"
         android:layout_width="163dp"
         android:layout_height="48dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="588dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="596dp"
         android:onClick="registrado"
         android:text="Registrarse"
         app:layout_constraintStart_toStartOf="parent"
@@ -147,16 +146,15 @@
 
     <EditText
         android:id="@+id/editTextText2"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_width="365dp"
+        android:layout_height="53dp"
         android:layout_marginTop="172dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/apellido"
         android:inputType="text"
         android:text=""
-        android:textColorHint="#8D6E63"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextEmailAddress2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextText"
         app:layout_constraintTop_toTopOf="parent"
