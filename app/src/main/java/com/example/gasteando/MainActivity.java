@@ -1,40 +1,63 @@
 package com.example.gasteando;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
 public class MainActivity extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // Inicializar Firebase Authentication y Firestore
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
     }
+
     public void login(View v) {
+        EditText campoCorreo = findViewById(R.id.correo);
+        EditText campoContrasenia = findViewById(R.id.contrasenia);
 
-        EditText campo1 = this.findViewById(R.id.correo);
-        String correo = campo1.getText().toString();
-        EditText campo2 =this.findViewById(R.id.contrasenia);
-        String contrasenia = campo2.getText().toString();
-        System.out.println(correo+" "+contrasenia);
+        String correo = campoCorreo.getText().toString();
+        String contrasenia = campoContrasenia.getText().toString();
 
-        if(correo.equals("c1") && contrasenia.equals("123")){
-
-            Intent i = new Intent(this, MenuPrincipal.class);
-            startActivity(i);
-
-        }else{
-            Toast.makeText(this,"Error en las credenciales", Toast.LENGTH_SHORT).show();
-        }
+        // Consultar Firestore para verificar las credenciales
+        db.collection("usuarios")
+                .whereEqualTo("correo", correo)
+                .whereEqualTo("contrasenia", contrasenia)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        QuerySnapshot result = task.getResult();
+                        if (result != null && !result.isEmpty()) {
+                            // Usuario autenticado correctamente
+                            Intent i = new Intent(this, MenuPrincipal.class);
+                            startActivity(i);
+                        } else {
+                            // Credenciales incorrectas o usuario no encontrado
+                            Toast.makeText(this, "Credenciales incorrectas o usuario no encontrado", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        // Error en la consulta a Firestore
+                        Toast.makeText(this, "Error al consultar Firestore", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
-    public void crearCuenta(View v){
+    public void crearCuenta(View v) {
         Intent i = new Intent(this, Registro.class);
         startActivity(i);
     }

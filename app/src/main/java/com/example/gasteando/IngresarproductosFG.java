@@ -64,7 +64,8 @@ public class IngresarproductosFG extends Fragment {
         // Configurar el botón de cancelar
         btnCancelar.setOnClickListener(v -> {
             // Cerrar el fragmento
-            getParentFragmentManager().popBackStack();
+            MenuFG mp = new MenuFG();
+            getParentFragmentManager().beginTransaction().replace(R.id.contenedor,mp).commit();
         });
 
         return view;

@@ -7,7 +7,7 @@
     tools:context=".Registro">
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/nombreR"
         android:layout_width="365dp"
         android:layout_height="48dp"
         android:layout_marginTop="80dp"
@@ -28,23 +28,21 @@
         android:layout_marginBottom="8dp"
         android:hint="@string/nombre"
         android:text="@string/nombre"
-        app:layout_constraintBottom_toTopOf="@+id/editTextText"
-        app:layout_constraintStart_toStartOf="@+id/editTextText"
+        app:layout_constraintBottom_toTopOf="@+id/nombreR"
+        app:layout_constraintStart_toStartOf="@+id/nombreR"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="8dp"
         android:text="@string/apellido"
-        app:layout_constraintBottom_toTopOf="@+id/editTextText2"
-        app:layout_constraintStart_toStartOf="@+id/editTextText2"
+        app:layout_constraintBottom_toTopOf="@+id/apellidoR"
+        app:layout_constraintStart_toStartOf="@+id/apellidoR"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress2"
+        android:id="@+id/correoR"
         android:layout_width="364dp"
         android:layout_height="48dp"
         android:layout_marginTop="272dp"
@@ -54,12 +52,12 @@
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextText"
+        app:layout_constraintStart_toStartOf="@+id/nombreR"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="DuplicateSpeakableTextCheck" />
 
     <EditText
-        android:id="@+id/editTextTextPassword3"
+        android:id="@+id/contraseniaR"
         android:layout_width="369dp"
         android:layout_height="48dp"
         android:layout_marginStart="24dp"
@@ -79,30 +77,27 @@
         android:layout_marginStart="2dp"
         android:layout_marginBottom="4dp"
         android:text="@string/confirmarContrasenia"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword2"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPassword2"
+        app:layout_constraintBottom_toTopOf="@+id/confirmarconR"
+        app:layout_constraintStart_toStartOf="@+id/confirmarconR"
         tools:ignore="MissingConstraints" />
+
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:layout_marginBottom="44dp"
         android:text="@string/correo"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTextEmailAddress2"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextEmailAddress2"
+        app:layout_constraintBottom_toTopOf="@+id/correoR"
+        app:layout_constraintStart_toStartOf="@+id/correoR"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/contrasenia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginBottom="40dp"
         android:text="@string/contrasenia"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPassword3"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPassword3"
+        app:layout_constraintBottom_toTopOf="@+id/contraseniaR"
+        app:layout_constraintStart_toStartOf="@+id/contraseniaR"
         tools:ignore="MissingConstraints" />
 
     <CheckBox
@@ -116,7 +111,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPassword2"
+        android:id="@+id/confirmarconR"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="464dp"
@@ -125,9 +120,9 @@
         android:hint="@string/confirmarContrasenia"
         android:importantForAutofill="no"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword3"
+        app:layout_constraintEnd_toEndOf="@+id/contraseniaR"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextEmailAddress2"
+        app:layout_constraintStart_toStartOf="@+id/correoR"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
 
@@ -145,7 +140,7 @@
         tools:ignore="HardcodedText" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/apellidoR"
         android:layout_width="365dp"
         android:layout_height="53dp"
         android:layout_marginTop="172dp"
@@ -156,7 +151,7 @@
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextText"
+        app:layout_constraintStart_toStartOf="@+id/nombreR"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="DuplicateSpeakableTextCheck" />
 

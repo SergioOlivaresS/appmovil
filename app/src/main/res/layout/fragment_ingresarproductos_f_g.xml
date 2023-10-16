@@ -81,12 +81,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="220dp"
         android:layout_marginTop="390dp"
-        android:onClick="menu"
         android:text="@string/cancelar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etMonto"
+        app:toggleCheckedStateOnClick="true"
         tools:ignore="VisualLintButtonSize" />
 
     <EditText
