@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -50,7 +51,15 @@ public class GastorealizadoFG extends Fragment {
             double monto = 0; // Obtener el monto desde algún lugar
 
             // Insertar el gasto en la base de datos
-            dbHelper.insertarGasto(fecha, categoria, monto);
+
+
+            // Luego de insertar el gasto, realizar la transacción al fragmento IngresarproductosFG
+            IngresarproductosFG ig = new IngresarproductosFG();
+            FragmentManager fragmentManager = getParentFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.contenedor, ig)
+                    .addToBackStack(null)
+                    .commit();
         });
 
         // Botón para buscar datos en la base de datos
@@ -60,10 +69,10 @@ public class GastorealizadoFG extends Fragment {
             String categoriaSeleccionada = spinnerCategoria.getSelectedItem().toString();
 
             // Consultar los datos de la base de datos
-            String datos = dbHelper.consultarDatosPorFechaYCategoria(fechaSeleccionada, categoriaSeleccionada);
+
 
             // Actualizar el TextView con los datos obtenidos
-            txtTotalGastos.setText(datos);
+
         });
 
         // Inicializar la fecha seleccionada

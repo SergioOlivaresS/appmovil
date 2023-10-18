@@ -34,11 +34,11 @@ public class ResumenFG extends Fragment {
 
     private void setupPieChart() {
         ArrayList<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(30f, "Categoría 1"));
-        entries.add(new PieEntry(25f, "Categoría 2"));
-        entries.add(new PieEntry(20f, "Categoría 3"));
-        entries.add(new PieEntry(15f, "Categoría 4"));
-        entries.add(new PieEntry(10f, "Categoría 5"));
+        entries.add(new PieEntry(30f, "Alimentación"));
+        entries.add(new PieEntry(25f, "Transporte"));
+        entries.add(new PieEntry(20f, "Entretención"));
+        entries.add(new PieEntry(15f, "Otros"));
+
 
         PieDataSet dataSet = new PieDataSet(entries, "Gastos por Categoría");
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS); // Colores para las secciones del gráfico

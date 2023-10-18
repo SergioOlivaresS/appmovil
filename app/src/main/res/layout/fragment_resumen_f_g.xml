@@ -17,9 +17,10 @@
         android:textColor="#FFFCFC"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="32dp"/>
+
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/pieChart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="644dp" />
 
 </FrameLayout>

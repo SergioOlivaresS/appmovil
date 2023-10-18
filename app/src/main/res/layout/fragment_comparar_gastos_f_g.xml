@@ -16,23 +16,20 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:text="@string/comparar_gastosFG"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        tools:ignore="TextContrastCheck,VisualLintOverlap" />
 
-    <Spinner
-        android:id="@+id/spinnerCategorias"
+    <TextView
+        android:id="@+id/fechas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:layout_marginBottom="16dp"
-        android:minHeight="48dp" />
-    android:hint="@string/seleccionaunacategoria"
-    android:minHeight="48dp" />
+        android:hint="@string/seleccione_intervalo_de_fecha"
+        android:minHeight="48dp"
+        tools:ignore="TextContrastCheck,VisualLintOverlap" />
 
-    <!-- Selector de Fechas de Inicio y Fin -->
 
-    <!-- Botón para Mostrar Datos -->
-
-    <!-- Resultados (puede ser un RecyclerView u otro elemento) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,7 +47,7 @@
             android:inputType="none"
             android:minHeight="48dp"
             android:onClick="mostrarDatePickerInicio"
-            tools:ignore="VisualLintTextFieldSize" />
+            tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
         tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize"
         android:autofillHints="" />
 
@@ -65,7 +62,7 @@
             android:hint="@string/fechadefin"
             android:inputType="none"
             android:onClick="mostrarDatePickerFin"
-            tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize" />
+            tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize,TextContrastCheck" />
         android:autofillHints="" />
     </LinearLayout>
 
