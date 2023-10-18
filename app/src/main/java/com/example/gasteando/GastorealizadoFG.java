@@ -8,10 +8,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -21,45 +21,49 @@ public class GastorealizadoFG extends Fragment {
 
     private EditText etFecha;
     private Calendar selectedDate;
+    private GastosDatabaseHelper dbHelper;
 
     public GastorealizadoFG() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflar el diseño del fragmento
         View view = inflater.inflate(R.layout.fragment_gastorealizado_f_g, container, false);
 
-        // Inicializa vistas
+        // Inicializar vistas
         etFecha = view.findViewById(R.id.etFecha);
         Spinner spinnerCategoria = view.findViewById(R.id.spinnerCategoria);
-        view.findViewById(R.id.txtTotalGastos);
+        TextView txtTotalGastos = view.findViewById(R.id.txtTotalGastos);
         Button btnAgregarProducto = view.findViewById(R.id.btnAgregarProducto);
-        Button btnEditarProducto = view.findViewById(R.id.btnEditarProducto);
+        Button btnBuscarDatos = view.findViewById(R.id.btnBuscarDatos);
+        dbHelper = new GastosDatabaseHelper(requireContext());
 
         // Botón para mostrar el selector de fecha
         etFecha.setOnClickListener(v -> showDatePickerDialog());
 
-        // Botón para agregar producto
+        // Botón para agregar gasto
         btnAgregarProducto.setOnClickListener(v -> {
-            // Obtén el administrador de fragmentos de la actividad principal
-            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+            String fecha = etFecha.getText().toString();
+            String categoria = spinnerCategoria.getSelectedItem().toString();
+            double monto = 0; // Obtener el monto desde algún lugar
 
-            // Crea una instancia del fragmento IngresarproductosFG
-            IngresarproductosFG ig = new IngresarproductosFG();
-
-            // Realiza la transacción de fragmentos
-            fragmentManager.beginTransaction()
-                    .replace(R.id.contenedor, ig)
-                    .addToBackStack(null) // Opcional: agrega la transacción a la pila de retroceso
-                    .commit();
+            // Insertar el gasto en la base de datos
+            dbHelper.insertarGasto(fecha, categoria, monto);
         });
 
-        // Botón para editar producto
-        btnEditarProducto.setOnClickListener(v -> {
-            // Lógica para editar un producto
+        // Botón para buscar datos en la base de datos
+        btnBuscarDatos.setOnClickListener(v -> {
+            // Obtenemos la fecha seleccionada y la categoría del Spinner
+            String fechaSeleccionada = etFecha.getText().toString();
+            String categoriaSeleccionada = spinnerCategoria.getSelectedItem().toString();
+
+            // Consultar los datos de la base de datos
+            String datos = dbHelper.consultarDatosPorFechaYCategoria(fechaSeleccionada, categoriaSeleccionada);
+
+            // Actualizar el TextView con los datos obtenidos
+            txtTotalGastos.setText(datos);
         });
 
         // Inicializar la fecha seleccionada
@@ -67,7 +71,7 @@ public class GastorealizadoFG extends Fragment {
         updateDateEditText();
 
         // Spinner con las opciones de categoría
-        String[] categorias = {"Total","Alimentación", "Entretenimiento", "Transporte", "Otro"};
+        String[] categorias = {"Total", "Alimentación", "Entretenimiento", "Transporte", "Otro"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, categorias);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCategoria.setAdapter(adapter);

@@ -8,13 +8,15 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:text="@string/gastos_realizados"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/etFecha"
@@ -53,22 +55,13 @@
 
     <Button
         android:id="@+id/btnAgregarProducto"
-        android:layout_width="144dp"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="85dp"
-        android:layout_marginTop="165dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="225dp"
         android:onClick="ingresarproductosfg"
         android:text="@string/agregarproductos" />
-
-    <Button
-        android:id="@+id/btnEditarProducto"
-        android:layout_width="144dp"
-        android:layout_height="61dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="-100dp"
-        android:layout_marginTop="165dp"
-        android:text="@string/editarproductos" />
 
     <TextView
         android:id="@+id/txtTotalGastos"
@@ -76,9 +69,16 @@
         android:layout_height="39dp"
         android:layout_marginTop="330dp"
         android:hint="@string/detalles"
+        android:textColorHint="#A1887F"
         android:textStyle="bold" />
 
-    <!-- Aquí puedes agregar un RecyclerView u otros elementos para mostrar la lista de gastos -->
+    <Button
+        android:id="@+id/btnBuscarDatos"
+        android:layout_width="144dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="-105dp"
+        android:layout_marginTop="225dp"
+        android:text="Buscar Datos" />
 
-
-    </FrameLayout>
+</FrameLayout>
