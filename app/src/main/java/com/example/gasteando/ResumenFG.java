@@ -34,10 +34,10 @@ public class ResumenFG extends Fragment {
 
     private void setupPieChart() {
         ArrayList<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(30f, "Alimentación"));
+        entries.add(new PieEntry(60f, "Alimentación"));
         entries.add(new PieEntry(25f, "Transporte"));
-        entries.add(new PieEntry(20f, "Entretención"));
-        entries.add(new PieEntry(15f, "Otros"));
+        entries.add(new PieEntry(10f, "Entretención"));
+        entries.add(new PieEntry(5f, "Otros"));
 
 
         PieDataSet dataSet = new PieDataSet(entries, "Gastos por Categoría");
@@ -47,7 +47,7 @@ public class ResumenFG extends Fragment {
 
         pieChart.setData(data);
         pieChart.getDescription().setEnabled(false); // Deshabilita la descripción
-        pieChart.setCenterText("Gastos"); // Texto en el centro del gráfico
+        pieChart.setCenterText("Gastos Por Categoria"); // Texto en el centro del gráfico
         pieChart.animateY(1000); // Animación de entrada
     }
 }

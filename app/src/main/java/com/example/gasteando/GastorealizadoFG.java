@@ -62,6 +62,7 @@ public class GastorealizadoFG extends Fragment {
                     .commit();
         });
 
+
         // Botón para buscar datos en la base de datos
         btnBuscarDatos.setOnClickListener(v -> {
             // Obtenemos la fecha seleccionada y la categoría del Spinner
@@ -75,6 +76,14 @@ public class GastorealizadoFG extends Fragment {
 
         });
 
+
+        Bundle args = getArguments();
+        if (args != null) {
+            String fechaSeleccionada = args.getString("fechaSeleccionada");
+            if (fechaSeleccionada != null) {
+                etFecha.setText(fechaSeleccionada);
+            }
+        }
         // Inicializar la fecha seleccionada
         selectedDate = Calendar.getInstance();
         updateDateEditText();

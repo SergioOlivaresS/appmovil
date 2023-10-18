@@ -50,16 +50,13 @@ public class CalendarioFG extends Fragment {
         // Mostrar la fecha seleccionada en un Toast (puedes personalizar esto)
         Toast.makeText(getContext(), "Fecha seleccionada: " + fechaSeleccionada, Toast.LENGTH_SHORT).show();
 
-        // Llamar al método gastorealizadofg en la actividad principal (MenuPrincipal)
+        // Llamar al método gastorealizadofg en el fragmento GastorealizadoFG y pasar la fecha seleccionada
         if (getActivity() instanceof MenuPrincipal) {
-            ((MenuPrincipal) getActivity()).gastorealizadofg(view);
+            MenuPrincipal menuPrincipal = (MenuPrincipal) getActivity();
+            menuPrincipal.gastorealizadofg(view);
         }
     }
-    public void gastorealizadofg(View v) {
-        GastorealizadoFG fragment = new GastorealizadoFG();
-        assert getSupportFragmentManager() != null;
-        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment).commit();
-    }
+
 
     private FragmentManager getSupportFragmentManager() {
         return null;
