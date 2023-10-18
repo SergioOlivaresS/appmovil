@@ -22,7 +22,6 @@ import java.util.Locale;
 
 public class CompararGastosFG extends Fragment {
 
-  //  private Spinner spinnerCategorias;
     private EditText etFechaInicio;
     private EditText etFechaFin;
     private TextView tvResultados;
@@ -100,10 +99,17 @@ public class CompararGastosFG extends Fragment {
     // Método para mostrar los datos según las selecciones
     @SuppressLint("SetTextI18n")
     private void mostrarDatos() {
-        // Obtener la categoría seleccionada
+        // Limpia el resultado anterior
+        tvResultados.setText("");
 
+        // Agregar las fechas seleccionadas al resultado
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+        String fechaInicioStr = dateFormat.format(fechaInicio.getTime());
+        String fechaFinStr = dateFormat.format(fechaFin.getTime());
+        String resultadoFechas = "Fechas seleccionadas: " + fechaInicioStr + " - " + fechaFinStr;
+        tvResultados.setText(resultadoFechas);
 
-        // Consultar el "Total" de todos los gastos para el día seleccionado
+        // Consultar el "Total" de todos los gastos para el período seleccionado
         Query totalQuery = db.collection("productos")
                 .whereGreaterThanOrEqualTo("fecha", fechaInicio.getTime())
                 .whereLessThanOrEqualTo("fecha", fechaFin.getTime());
