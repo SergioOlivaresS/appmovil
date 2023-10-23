@@ -103,21 +103,21 @@ public class CompararGastosFG extends Fragment {
         tvResultados.setText("");
 
         // Agregar las fechas seleccionadas al resultado
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-        String fechaInicioStr = dateFormat.format(fechaInicio.getTime());
-        String fechaFinStr = dateFormat.format(fechaFin.getTime());
+        String fechaInicioStr = etFechaInicio.getText().toString();
+        String fechaFinStr = etFechaFin.getText().toString();
         String resultadoFechas = "Fechas seleccionadas: " + fechaInicioStr + " - " + fechaFinStr;
         tvResultados.setText(resultadoFechas);
 
         // Consultar el "Total" de todos los gastos para el período seleccionado
         Query totalQuery = db.collection("productos")
-                .whereGreaterThanOrEqualTo("fecha", fechaInicio.getTime())
-                .whereLessThanOrEqualTo("fecha", fechaFin.getTime());
+                .whereGreaterThanOrEqualTo("fecha", fechaInicioStr)
+                .whereLessThanOrEqualTo("fecha", fechaFinStr);
 
         totalQuery.get().addOnCompleteListener(totalTask -> {
             if (totalTask.isSuccessful()) {
                 double totalGastos = 0.0;
                 for (QueryDocumentSnapshot document : totalTask.getResult()) {
+                    // Obtener el monto como un número (double)
                     double monto = document.getDouble("monto");
                     totalGastos += monto;
                 }

@@ -15,13 +15,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class IngresarproductosFG extends Fragment {
@@ -82,19 +77,9 @@ public class IngresarproductosFG extends Fragment {
 
             String categoria = spinnerCategoria.getSelectedItem().toString();
 
-            // Convertir la fecha a un objeto Date
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-            Date fechaDate;
-            try {
-                fechaDate = dateFormat.parse(fechaStr);
-            } catch (ParseException e) {
-                // Manejar cualquier error al analizar la fecha
-                fechaDate = new Date(); // Utilizar la fecha actual como valor predeterminado
-            }
-
             // Crear un nuevo objeto para representar un registro de producto
             Map<String, Object> producto = new HashMap<>();
-            producto.put("fecha", fechaDate); // Guardar la fecha como Date (sin zona horaria)
+            producto.put("fecha", fechaStr); // Guardar la fecha como cadena
             producto.put("detalle", detalle);
             producto.put("monto", monto);
             producto.put("categoria", categoria);

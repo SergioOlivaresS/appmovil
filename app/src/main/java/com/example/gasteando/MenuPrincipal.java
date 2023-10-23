@@ -96,7 +96,7 @@ public class MenuPrincipal extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, ig).commit();
     }
 
-    public void gastorealizadofg(View v) {
+    public void gastorealizadofg (View v) {
         GastorealizadoFG gr = new GastorealizadoFG();
         getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, gr).commit();
     }
@@ -114,5 +114,10 @@ public class MenuPrincipal extends AppCompatActivity {
     public void menu(View v) {
         MenuFG m = new MenuFG();
         getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,m).commit();
+    }
+
+    public void gastorealizadofg(String fechaSeleccionada) {
+        GastorealizadoFG hg = new GastorealizadoFG();
+        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, hg).commit();
     }
 }
