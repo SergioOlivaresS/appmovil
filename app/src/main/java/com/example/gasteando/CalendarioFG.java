@@ -42,7 +42,7 @@ public class CalendarioFG extends Fragment {
                 // Llamar al método gastorealizadofg en la actividad MenuPrincipal y pasar la fecha seleccionada
                 if (getActivity() instanceof MenuPrincipal) {
                     MenuPrincipal menuPrincipal = (MenuPrincipal) getActivity();
-                    menuPrincipal.gastorealizadofg(fechaSeleccionada);
+                    menuPrincipal.gastorealizadocalendario(fechaSeleccionada);
                 }
             }
         });

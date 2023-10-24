@@ -116,8 +116,21 @@ public class MenuPrincipal extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,m).commit();
     }
 
-    public void gastorealizadofg(String fechaSeleccionada) {
-        GastorealizadoFG hg = new GastorealizadoFG();
-        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, hg).commit();
+    public void gastorealizadocalendario(String fechaSeleccionada) {
+
+        GastorealizadoFG gastorealizadoFragment = new GastorealizadoFG();
+        Bundle args = new Bundle();
+        args.putString("fechaSeleccionada", fechaSeleccionada);
+        gastorealizadoFragment.setArguments(args);
+        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, gastorealizadoFragment).commit();
+    }
+
+    public GastosDatabaseHelper getDbHelper() {
+        return null;
+    }
+
+    public void editorfg (View v){
+        EditardatosFG ed = new EditardatosFG();
+        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, ed).commit();
     }
 }

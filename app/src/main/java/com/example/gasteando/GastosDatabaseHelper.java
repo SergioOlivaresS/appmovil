@@ -52,4 +52,6 @@ public class GastosDatabaseHelper extends SQLiteOpenHelper {
         // Agrega más actualizaciones según sea necesario para futuras versiones.
     }
 
+    public void updateData(String editedData) {
+    }
 }

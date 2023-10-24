@@ -32,11 +32,22 @@ public class GastorealizadoFG extends Fragment {
     private Calendar selectedDate;
     private GastosDatabaseHelper dbHelper;
     private TextView txtTotalGastos;
-    private FirebaseFirestore db; // Agrega esta línea para usar Firestore
+    private FirebaseFirestore db;
     private String fechaSeleccionada;
+
+    // Listener para editar datos
+    private EditDataListener editDataListener;
 
     public GastorealizadoFG() {
         // Required empty public constructor
+    }
+
+    public interface EditDataListener {
+        void onEditDataRequested(String dataToEdit);
+    }
+
+    public void setEditDataListener(EditDataListener listener) {
+        this.editDataListener = listener;
     }
 
     // Método para configurar la fecha seleccionada
@@ -53,8 +64,9 @@ public class GastorealizadoFG extends Fragment {
         txtTotalGastos = view.findViewById(R.id.txtTotalGastos);
         Button btnAgregarProducto = view.findViewById(R.id.btnAgregarProducto);
         Button btnBuscarDatos = view.findViewById(R.id.btnBuscarDatos);
+        Button btnEditarDatos = view.findViewById(R.id.btnEditarDatos);
         dbHelper = new GastosDatabaseHelper(requireContext());
-        db = FirebaseFirestore.getInstance(); // Inicializa Firestore
+        db = FirebaseFirestore.getInstance();
 
         etFecha.setOnClickListener(v -> showDatePickerDialog());
 
@@ -74,10 +86,8 @@ public class GastorealizadoFG extends Fragment {
         });
 
         btnBuscarDatos.setOnClickListener(v -> {
-            // Usar la fecha seleccionada
             String fechaSeleccionada = etFecha.getText().toString();
 
-            // Consulta los datos en Firestore para el día seleccionado
             db.collection("productos")
                     .whereEqualTo("fecha", fechaSeleccionada)
                     .get()
@@ -92,7 +102,6 @@ public class GastorealizadoFG extends Fragment {
                                     double monto = document.getDouble("monto");
                                     totalGastos += monto;
 
-                                    // Obtener el detalle (ajusta el campo según tu estructura de Firestore)
                                     String detalle = document.getString("detalle");
                                     detalles.append("Monto: ").append(monto).append(", Detalle: ").append(detalle).append("\n");
                                 }
@@ -101,14 +110,26 @@ public class GastorealizadoFG extends Fragment {
                                 String detallesText = "Detalles:\n" + detalles.toString();
                                 txtTotalGastos.setText(resultadoTotal + "\n" + detallesText);
                             } else {
-                                // Maneja errores
                                 Log.e("Firestore", "Error al obtener datos: " + task.getException());
                             }
                         }
                     });
         });
 
-        // Cargar la fecha seleccionada si se pasó desde el Calendario
+        btnEditarDatos.setOnClickListener(v -> {
+            EditardatosFG ed = new EditardatosFG();
+            FragmentManager fragmentManager = getParentFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.contenedor, ed)
+                    .addToBackStack(null)
+                    .commit();
+
+            String dataToEdit = "Datos a editar"; // Reemplaza esto con los datos reales
+            if (editDataListener != null) {
+                editDataListener.onEditDataRequested(dataToEdit);
+            }
+        });
+
         if (fechaSeleccionada != null && !fechaSeleccionada.isEmpty()) {
             etFecha.setText(fechaSeleccionada);
         }

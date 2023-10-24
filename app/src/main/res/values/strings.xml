@@ -52,4 +52,9 @@
     <string name="menu_principal_fg">Menu Principal</string>
     <string name="seleccione_el_intervalo_entre_2_fechas">Seleccione el intervalo entre 2 fechas</string>
     <string name="seleccione_intervalo_de_fecha">Seleccione Intervalo de Fecha</string>
+    <string name="editardatos">Editar Datos</string>
+    <string name="editar_datos">Editar Datos</string>
+    <string name="buscar_datos">Buscar Datos</string>
+    <string name="editar_dato">Editar dato</string>
+    <string name="guardar_cambios">Guardar Cambios</string>
 </resources>
