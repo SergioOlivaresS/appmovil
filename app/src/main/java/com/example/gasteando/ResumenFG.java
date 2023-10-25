@@ -12,12 +12,16 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
 public class ResumenFG extends Fragment {
 
     private PieChart pieChart;
+    private FirebaseFirestore db;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -26,28 +30,82 @@ public class ResumenFG extends Fragment {
         // Inicializa el PieChart desde el diseño XML
         pieChart = view.findViewById(R.id.pieChart);
 
-        // Configura los datos del gráfico
-        setupPieChart();
+        // Inicializa Firebase Firestore
+        db = FirebaseFirestore.getInstance();
+
+        // Obtén los datos de la base de datos y configura el gráfico
+        fetchAndSetupPieChart();
 
         return view;
     }
 
-    private void setupPieChart() {
+    private void fetchAndSetupPieChart() {
+        // Realiza una consulta a Firestore para obtener los datos de gasto
+        db.collection("productos")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    // Procesa los datos para calcular los porcentajes
+                    ArrayList<PieEntry> entries = processGastoData(queryDocumentSnapshots);
+
+                    // Configura el gráfico con los porcentajes calculados
+                    setupPieChart(entries);
+                });
+    }
+
+    private ArrayList<PieEntry> processGastoData(QuerySnapshot queryDocumentSnapshots) {
+        // Calcula los totales por categoría
+        double totalAlimentacion = 0.0;
+        double totalTransporte = 0.0;
+        double totalEntretenimiento = 0.0;
+        double totalOtros = 0.0;
+
+        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+            double monto = document.getDouble("monto");
+            String categoria = document.getString("categoria");
+
+            if (categoria != null) {
+                switch (categoria) {
+                    case "Alimentación":
+                        totalAlimentacion += monto;
+                        break;
+                    case "Transporte":
+                        totalTransporte += monto;
+                        break;
+                    case "Entretenimiento":
+                        totalEntretenimiento += monto;
+                        break;
+                    case "Otro":
+                        totalOtros += monto;
+                        break;
+                }
+            }
+        }
+
+        // Calcula los porcentajes
+        double totalGastos = totalAlimentacion + totalTransporte + totalEntretenimiento + totalOtros;
+
         ArrayList<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(60f, "Alimentación"));
-        entries.add(new PieEntry(25f, "Transporte"));
-        entries.add(new PieEntry(10f, "Entretención"));
-        entries.add(new PieEntry(5f, "Otros"));
+        if (totalGastos > 0) {
+            entries.add(new PieEntry((float) (totalAlimentacion / totalGastos * 100), "Alimentación"));
+            entries.add(new PieEntry((float) (totalTransporte / totalGastos * 100), "Transporte"));
+            entries.add(new PieEntry((float) (totalEntretenimiento / totalGastos * 100), "Entretenimiento"));
+            entries.add(new PieEntry((float) (totalOtros / totalGastos * 100), "Otro"));
+        }
 
+        return entries;
+    }
 
+    private void setupPieChart(ArrayList<PieEntry> entries) {
         PieDataSet dataSet = new PieDataSet(entries, "Gastos por Categoría");
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS); // Colores para las secciones del gráfico
+        dataSet.setValueTextSize(16f);
 
         PieData data = new PieData(dataSet);
 
         pieChart.setData(data);
-        pieChart.getDescription().setEnabled(false); // Deshabilita la descripción
-        pieChart.setCenterText("Gastos Por Categoria"); // Texto en el centro del gráfico
-        pieChart.animateY(1000); // Animación de entrada
+        pieChart.getDescription().setEnabled(false); //
+        pieChart.setCenterText("Porcentaje de sus gastos totales");
+        pieChart.animateY(1000);
+        pieChart.invalidate();
     }
 }

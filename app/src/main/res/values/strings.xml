@@ -57,4 +57,9 @@
     <string name="buscar_datos">Buscar Datos</string>
     <string name="editar_dato">Editar dato</string>
     <string name="guardar_cambios">Guardar Cambios</string>
+    <string name="categor_a">Categoría</string>
+    <string name="detall">Detalle</string>
+    <string name="fecha">Fecha</string>
+    <string name="mont">Monto</string>
+    <string name="guardar">Guardar</string>
 </resources>
