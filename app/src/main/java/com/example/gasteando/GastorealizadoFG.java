@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -87,33 +88,39 @@ public class GastorealizadoFG extends Fragment {
 
         btnBuscarDatos.setOnClickListener(v -> {
             String fechaSeleccionada = etFecha.getText().toString();
+            String categoriaSeleccionada = spinnerCategoria.getSelectedItem().toString();
 
-            db.collection("productos")
-                    .whereEqualTo("fecha", fechaSeleccionada)
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                double totalGastos = 0.0;
-                                StringBuilder detalles = new StringBuilder();
+            // Crea una consulta inicial
+            Query query = db.collection("productos").whereEqualTo("fecha", fechaSeleccionada);
 
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    double monto = document.getDouble("monto");
-                                    totalGastos += monto;
+            // Verifica la categoría y ajusta la consulta si no es "Total"
+            if (!categoriaSeleccionada.equals("Total")) {
+                query = query.whereEqualTo("categoria", categoriaSeleccionada);
+            }
 
-                                    String detalle = document.getString("detalle");
-                                    detalles.append("Monto: ").append(monto).append(", Detalle: ").append(detalle).append("\n");
-                                }
+            query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        double totalGastos = 0.0;
+                        StringBuilder detalles = new StringBuilder();
 
-                                String resultadoTotal = "El gasto Total fue de: " + totalGastos;
-                                String detallesText = "Detalles:\n" + detalles.toString();
-                                txtTotalGastos.setText(resultadoTotal + "\n" + detallesText);
-                            } else {
-                                Log.e("Firestore", "Error al obtener datos: " + task.getException());
-                            }
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            double monto = document.getDouble("monto");
+                            totalGastos += monto;
+
+                            String detalle = document.getString("detalle");
+                            detalles.append("Monto: ").append(monto).append(", Detalle: ").append(detalle).append("\n");
                         }
-                    });
+
+                        String resultadoTotal = "El gasto Total fue de: " + totalGastos;
+                        String detallesText = "Detalles:\n" + detalles.toString();
+                        txtTotalGastos.setText(resultadoTotal + "\n" + detallesText);
+                    } else {
+                        Log.e("Firestore", "Error al obtener datos: " + task.getException());
+                    }
+                }
+            });
         });
 
         btnEditarDatos.setOnClickListener(v -> {
