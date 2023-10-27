@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
 import com.google.android.material.tabs.TabLayout;
+
 import java.util.Objects;
 
 public class MenuPrincipal extends AppCompatActivity {
@@ -132,5 +135,12 @@ public class MenuPrincipal extends AppCompatActivity {
     public void editorfg (View v){
         EditardatosFG ed = new EditardatosFG();
         getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, ed).commit();
+    }
+
+    public void replaceFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.contenedor, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 }

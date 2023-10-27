@@ -2,6 +2,8 @@ package com.example.gasteando;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,32 +30,40 @@ public class CompararGastosFG extends Fragment {
     private FirebaseFirestore db;
 
     private Calendar fechaInicio, fechaFin;
+    private String userId;
 
     public CompararGastosFG() {
-        // Required empty public constructor
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_comparar_gastos_f_g, container, false);
 
-        // Inicializar vistas
         etFechaInicio = rootView.findViewById(R.id.etFechaInicio);
         etFechaFin = rootView.findViewById(R.id.etFechaFin);
         Button btnMostrarDatos = rootView.findViewById(R.id.btnMostrarDatos);
         tvResultados = rootView.findViewById(R.id.tvResultados);
         db = FirebaseFirestore.getInstance();
 
-        // Configurar el campo de fecha de inicio para mostrar el DatePickerDialog
         etFechaInicio.setOnClickListener(v -> mostrarDatePickerInicio());
 
-        // Configurar el campo de fecha de fin para mostrar el DatePickerDialog
+
         etFechaFin.setOnClickListener(v -> mostrarDatePickerFin());
 
-        // Configurar el botón para mostrar los datos según las selecciones
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        userId = sharedPreferences.getString("userID", null);
+
+
+        if (userId == null) {
+
+            tvResultados.setText("Error: El usuario no ha iniciado sesión.");
+            btnMostrarDatos.setEnabled(false);
+            etFechaInicio.setEnabled(false);
+            etFechaFin.setEnabled(false);
+        }
         btnMostrarDatos.setOnClickListener(v -> mostrarDatos());
 
-        // Inicializar las fechas de inicio y fin con la fecha actual
         fechaInicio = Calendar.getInstance();
         fechaFin = Calendar.getInstance();
         updateFechaEditTexts();
@@ -61,7 +71,6 @@ public class CompararGastosFG extends Fragment {
         return rootView;
     }
 
-    // Método para mostrar el DatePickerDialog de la fecha de inicio
     private void mostrarDatePickerInicio() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 requireContext(), (view, year, month, dayOfMonth) -> {
@@ -75,7 +84,7 @@ public class CompararGastosFG extends Fragment {
         datePickerDialog.show();
     }
 
-    // Método para mostrar el DatePickerDialog de la fecha de fin
+
     private void mostrarDatePickerFin() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 requireContext(), (view, year, month, dayOfMonth) -> {
@@ -89,42 +98,46 @@ public class CompararGastosFG extends Fragment {
         datePickerDialog.show();
     }
 
-    // Método para actualizar los campos de fecha con las fechas seleccionadas
+
     private void updateFechaEditTexts() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
         etFechaInicio.setText(dateFormat.format(fechaInicio.getTime()));
         etFechaFin.setText(dateFormat.format(fechaFin.getTime()));
     }
 
-    // Método para mostrar los datos según las selecciones
+
     @SuppressLint("SetTextI18n")
     private void mostrarDatos() {
-        // Limpia el resultado anterior
         tvResultados.setText("");
 
-        // Agregar las fechas seleccionadas al resultado
         String fechaInicioStr = etFechaInicio.getText().toString();
         String fechaFinStr = etFechaFin.getText().toString();
         String resultadoFechas = "Fechas seleccionadas: " + fechaInicioStr + " - " + fechaFinStr;
         tvResultados.setText(resultadoFechas);
 
-        // Consultar el "Total" de todos los gastos para el período seleccionado
+
         Query totalQuery = db.collection("productos")
                 .whereGreaterThanOrEqualTo("fecha", fechaInicioStr)
-                .whereLessThanOrEqualTo("fecha", fechaFinStr);
+                .whereLessThanOrEqualTo("fecha", fechaFinStr)
+                .whereEqualTo("userId", userId);
+
 
         totalQuery.get().addOnCompleteListener(totalTask -> {
             if (totalTask.isSuccessful()) {
                 double totalGastos = 0.0;
                 for (QueryDocumentSnapshot document : totalTask.getResult()) {
-                    // Obtener el monto como un número (double)
+
                     double monto = document.getDouble("monto");
                     totalGastos += monto;
                 }
-                // Agregar el "Total" al resultado
+
                 String resultadoActual = tvResultados.getText().toString();
                 String resultadoTotal = resultadoActual + "\nGastos Total entre las fechas seleccionadas: " + totalGastos;
                 tvResultados.setText(resultadoTotal);
+            } else {
+
+                String errorMessage = "Error al obtener datos: " + totalTask.getException().getMessage();
+                tvResultados.setText(errorMessage);
             }
         });
     }

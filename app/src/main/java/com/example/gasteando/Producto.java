@@ -7,7 +7,6 @@ public class Producto {
     private double monto;
 
     public Producto() {
-        // Constructor vacío requerido por Firebase
     }
 
     public Producto(String categoria, String detalle, String fecha, double monto) {

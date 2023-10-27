@@ -1,5 +1,7 @@
 package com.example.gasteando;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -71,6 +73,11 @@ public class GastorealizadoFG extends Fragment {
 
         etFecha.setOnClickListener(v -> showDatePickerDialog());
 
+        Bundle args = getArguments();
+        if (args != null && args.containsKey("fechaSeleccionada")) {
+            fechaSeleccionada = args.getString("fechaSeleccionada");
+        }
+
         btnAgregarProducto.setOnClickListener(v -> {
             String fecha = etFecha.getText().toString();
             String categoria = spinnerCategoria.getSelectedItem().toString();
@@ -90,8 +97,19 @@ public class GastorealizadoFG extends Fragment {
             String fechaSeleccionada = etFecha.getText().toString();
             String categoriaSeleccionada = spinnerCategoria.getSelectedItem().toString();
 
-            // Crea una consulta inicial
-            Query query = db.collection("productos").whereEqualTo("fecha", fechaSeleccionada);
+            // Obten el ID del usuario almacenado en SharedPreferences
+            SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserData", Context.MODE_PRIVATE);
+            String userId = sharedPreferences.getString("userID", null);
+
+            if (userId == null) {
+
+                return;
+            }
+
+            // Crea una consulta inicial con el filtro de fecha
+            Query query = db.collection("productos")
+                    .whereEqualTo("fecha", fechaSeleccionada)
+                    .whereEqualTo("userId", userId);
 
             // Verifica la categoría y ajusta la consulta si no es "Total"
             if (!categoriaSeleccionada.equals("Total")) {
@@ -122,6 +140,7 @@ public class GastorealizadoFG extends Fragment {
                 }
             });
         });
+
 
         btnEditarDatos.setOnClickListener(v -> {
             EditardatosFG ed = new EditardatosFG();

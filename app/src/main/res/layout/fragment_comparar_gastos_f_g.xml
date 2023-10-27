@@ -71,13 +71,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="200dp"
         android:text="@string/mostrardatos" />
 
     <TextView
         android:id="@+id/tvResultados"
         android:layout_width="match_parent"
-        android:layout_height="58dp"
+        android:layout_height="230dp"
         android:layout_marginTop="270dp" />
 
 </FrameLayout>

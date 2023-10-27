@@ -1,5 +1,7 @@
 package com.example.gasteando;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,19 +24,24 @@ public class ResumenFG extends Fragment {
 
     private PieChart pieChart;
     private FirebaseFirestore db;
+    private String userId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_resumen_f_g, container, false);
 
-        // Inicializa el PieChart desde el diseño XML
         pieChart = view.findViewById(R.id.pieChart);
 
-        // Inicializa Firebase Firestore
-        db = FirebaseFirestore.getInstance();
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        userId = sharedPreferences.getString("userID", null);
 
-        // Obtén los datos de la base de datos y configura el gráfico
-        fetchAndSetupPieChart();
+        if (userId != null) {
+            db = FirebaseFirestore.getInstance();
+
+            fetchAndSetupPieChart();
+        } else {
+
+        }
 
         return view;
     }
@@ -42,6 +49,7 @@ public class ResumenFG extends Fragment {
     private void fetchAndSetupPieChart() {
         // Realiza una consulta a Firestore para obtener los datos de gasto
         db.collection("productos")
+                .whereEqualTo("userId", userId) // Filtra por el ID de usuario
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     // Procesa los datos para calcular los porcentajes
@@ -97,13 +105,13 @@ public class ResumenFG extends Fragment {
 
     private void setupPieChart(ArrayList<PieEntry> entries) {
         PieDataSet dataSet = new PieDataSet(entries, "Gastos por Categoría");
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS); // Colores para las secciones del gráfico
+        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         dataSet.setValueTextSize(16f);
 
         PieData data = new PieData(dataSet);
 
         pieChart.setData(data);
-        pieChart.getDescription().setEnabled(false); //
+        pieChart.getDescription().setEnabled(false);
         pieChart.setCenterText("Porcentaje de sus gastos totales");
         pieChart.animateY(1000);
         pieChart.invalidate();

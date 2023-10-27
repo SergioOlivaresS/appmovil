@@ -1,7 +1,9 @@
 package com.example.gasteando;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -51,7 +53,8 @@ public class Registro extends AppCompatActivity {
         boolean aceptaTerminos = checkBox.isChecked();
 
         // Comprueba si los campos están vacíos
-        if (nombre.isEmpty() || apellido.isEmpty() || correo.isEmpty() || contrasenia.isEmpty() || confirmarContrasenia.isEmpty() || !checkBox.isChecked()) {            Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+        if (nombre.isEmpty() || apellido.isEmpty() || correo.isEmpty() || contrasenia.isEmpty() || confirmarContrasenia.isEmpty() || !checkBox.isChecked()) {
+            Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -66,6 +69,12 @@ public class Registro extends AppCompatActivity {
         // Agregar el objeto a la base de datos
         usuariosRef.add(nuevoUsuario)
                 .addOnSuccessListener(documentReference -> {
+                    // Obtiene el ID del documento recién creado
+                    String userID = documentReference.getId();
+
+                    // Guarda el ID del usuario en SharedPreferences
+                    guardarUserIdEnSharedPreferences(userID);
+
                     Toast.makeText(this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show();
                     // Una vez registrado el usuario en Firestore, puedes redirigirlo a la pantalla principal o a donde desees
                     Intent intent = new Intent(this, MainActivity.class);
@@ -74,5 +83,12 @@ public class Registro extends AppCompatActivity {
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Error al registrar usuario: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
+    }
+
+    private void guardarUserIdEnSharedPreferences(String userID) {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("userID", userID);
+        editor.apply();
     }
 }

@@ -1,6 +1,8 @@
 package com.example.gasteando;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,8 +27,9 @@ public class IngresarproductosFG extends Fragment {
     private Spinner spinnerCategoria;
     private FirebaseFirestore db;
 
+    private String userId;
+
     public IngresarproductosFG() {
-        // Required empty public constructor
     }
 
     @Override
@@ -34,14 +37,16 @@ public class IngresarproductosFG extends Fragment {
         super.onCreate(savedInstanceState);
         // Inicializar Firestore
         db = FirebaseFirestore.getInstance();
+
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        userId = sharedPreferences.getString("userID", null);
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflar el diseño del fragmento
         View view = inflater.inflate(R.layout.fragment_ingresarproductos_f_g, container, false);
 
-        // Inicializar vistas
         etFecha = view.findViewById(R.id.etFecha);
         etDetalle = view.findViewById(R.id.etDetalle);
         etMonto = view.findViewById(R.id.etMonto);
@@ -49,58 +54,53 @@ public class IngresarproductosFG extends Fragment {
         Button btnIngresar = view.findViewById(R.id.btnIngresar);
         Button btnCancelar = view.findViewById(R.id.btnCancelar);
 
-        // Spinner con opciones de categoría
         String[] categorias = {"Alimentación", "Entretenimiento", "Transporte", "Otro"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, categorias);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCategoria.setAdapter(adapter);
 
-        // Configurar el campo de fecha para mostrar el DatePickerDialog
         etFecha.setOnClickListener(v -> mostrarDatePicker());
 
-        // Configurar el botón de ingreso
+
         btnIngresar.setOnClickListener(v -> {
-            // Obtener los valores ingresados por el usuario
-            String fechaStr = etFecha.getText().toString(); // Fecha en formato "dd/MM/yyyy"
+
+            String fechaStr = etFecha.getText().toString();
             String detalle = etDetalle.getText().toString();
-            String montoStr = etMonto.getText().toString(); // Obtener el valor como cadena
-
-            // Validar que el monto sea un número válido
-            double monto; // Valor predeterminado en caso de que no se pueda analizar el número
+            String montoStr = etMonto.getText().toString();
+            double monto;
             try {
-                monto = Double.parseDouble(montoStr); // Intenta analizar el número
+                monto = Double.parseDouble(montoStr);
             } catch (NumberFormatException e) {
-                // Mostrar un mensaje de error si el valor no es válido
                 Toast.makeText(requireContext(), "El monto ingresado no es válido", Toast.LENGTH_LONG).show();
-                return; // Salir de la función si el monto no es válido
+                return;
             }
-
             String categoria = spinnerCategoria.getSelectedItem().toString();
 
-            // Crear un nuevo objeto para representar un registro de producto
+
             Map<String, Object> producto = new HashMap<>();
-            producto.put("fecha", fechaStr); // Guardar la fecha como cadena
+            producto.put("fecha", fechaStr);
             producto.put("detalle", detalle);
             producto.put("monto", monto);
             producto.put("categoria", categoria);
 
-            // Agregar el registro a Firestore
+
+            producto.put("userId", userId);
+
+
             db.collection("productos")
                     .add(producto)
                     .addOnSuccessListener(documentReference -> {
                         Toast.makeText(requireContext(), "Producto ingresado exitosamente", Toast.LENGTH_LONG).show();
-                        // Limpiar los campos después de guardar con éxito
                         etFecha.setText("");
                         etDetalle.setText("");
                         etMonto.setText("");
-                        // Puedes reiniciar el spinner a una opción predeterminada si es necesario
                     })
                     .addOnFailureListener(e -> Toast.makeText(requireContext(), "Error al ingresar el producto", Toast.LENGTH_LONG).show());
         });
 
-        // Configurar el botón de cancelar
+
         btnCancelar.setOnClickListener(v -> {
-            // Cerrar el fragmento
+
             MenuFG mp = new MenuFG();
             getParentFragmentManager().beginTransaction().replace(R.id.contenedor, mp).commit();
         });
@@ -115,7 +115,7 @@ public class IngresarproductosFG extends Fragment {
         int dia = calendario.get(Calendar.DAY_OF_MONTH);
 
         @SuppressLint("DefaultLocale") android.app.DatePickerDialog datePickerDialog = new android.app.DatePickerDialog(requireContext(), (view, year, monthOfYear, dayOfMonth) -> {
-            // Actualizar el campo de fecha con la fecha seleccionada
+
             etFecha.setText(String.format("%02d/%02d/%04d", dayOfMonth, monthOfYear + 1, year));
         }, anio, mes, dia);
         datePickerDialog.show();
