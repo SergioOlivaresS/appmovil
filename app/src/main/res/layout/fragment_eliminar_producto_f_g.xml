@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".EliminarProductoFG">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eliminar Producto"
+        android:layout_marginBottom="16dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerProductos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:prompt="@string/selecciona_producto" />
+
+    <Button
+        android:id="@+id/btnEliminar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:text="@string/eliminar_product"
+        android:textColor="#FFFFFF" />
+
+
+
+
+</LinearLayout>

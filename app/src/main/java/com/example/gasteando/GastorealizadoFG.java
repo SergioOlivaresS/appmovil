@@ -38,19 +38,8 @@ public class GastorealizadoFG extends Fragment {
     private FirebaseFirestore db;
     private String fechaSeleccionada;
 
-    // Listener para editar datos
-    private EditDataListener editDataListener;
-
     public GastorealizadoFG() {
         // Required empty public constructor
-    }
-
-    public interface EditDataListener {
-        void onEditDataRequested(String dataToEdit);
-    }
-
-    public void setEditDataListener(EditDataListener listener) {
-        this.editDataListener = listener;
     }
 
     // Método para configurar la fecha seleccionada
@@ -67,7 +56,7 @@ public class GastorealizadoFG extends Fragment {
         txtTotalGastos = view.findViewById(R.id.txtTotalGastos);
         Button btnAgregarProducto = view.findViewById(R.id.btnAgregarProducto);
         Button btnBuscarDatos = view.findViewById(R.id.btnBuscarDatos);
-        Button btnEditarDatos = view.findViewById(R.id.btnEditarDatos);
+        Button btnEliminarProducto = view.findViewById(R.id.btnEliminarProducto); // Botón para eliminar
         dbHelper = new GastosDatabaseHelper(requireContext());
         db = FirebaseFirestore.getInstance();
 
@@ -84,7 +73,6 @@ public class GastorealizadoFG extends Fragment {
             double monto = 0;
 
             // Inserta el gasto en la base de datos
-
             IngresarproductosFG ig = new IngresarproductosFG();
             FragmentManager fragmentManager = getParentFragmentManager();
             fragmentManager.beginTransaction()
@@ -102,7 +90,6 @@ public class GastorealizadoFG extends Fragment {
             String userId = sharedPreferences.getString("userID", null);
 
             if (userId == null) {
-
                 return;
             }
 
@@ -141,19 +128,14 @@ public class GastorealizadoFG extends Fragment {
             });
         });
 
-
-        btnEditarDatos.setOnClickListener(v -> {
-            EditardatosFG ed = new EditardatosFG();
+        btnEliminarProducto.setOnClickListener(v -> {
+            // Reemplaza el fragmento actual con el fragmento de eliminación
+            EliminarProductoFG eliminarProductoFG = new EliminarProductoFG();
             FragmentManager fragmentManager = getParentFragmentManager();
             fragmentManager.beginTransaction()
-                    .replace(R.id.contenedor, ed)
+                    .replace(R.id.contenedor, eliminarProductoFG)
                     .addToBackStack(null)
                     .commit();
-
-            String dataToEdit = "Datos a editar"; // Reemplaza esto con los datos reales
-            if (editDataListener != null) {
-                editDataListener.onEditDataRequested(dataToEdit);
-            }
         });
 
         if (fechaSeleccionada != null && !fechaSeleccionada.isEmpty()) {
@@ -190,5 +172,10 @@ public class GastorealizadoFG extends Fragment {
 
     public void setDbHelper(GastosDatabaseHelper dbHelper) {
         this.dbHelper = dbHelper;
+    }
+
+    // Método para eliminar el producto seleccionado
+    private void eliminarProductoSeleccionado() {
+        // Realiza aquí la lógica para eliminar el producto seleccionado.
     }
 }

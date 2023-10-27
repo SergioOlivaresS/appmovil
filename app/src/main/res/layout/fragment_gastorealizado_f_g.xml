@@ -80,12 +80,12 @@
         android:text="@string/buscar_datos" />
 
     <Button
-        android:id="@+id/btnEditarDatos"
+        android:id="@+id/btnEliminarProducto"
         android:layout_width="139dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="-105dp"
         android:layout_marginTop="165dp"
-        android:onClick="editorfg"
-        android:text="@string/editar_datos" />
+        android:onClick="eliminarProductoSeleccionado"
+        android:text="@string/eliminar_producto" />
 </FrameLayout>

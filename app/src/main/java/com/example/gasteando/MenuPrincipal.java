@@ -132,10 +132,6 @@ public class MenuPrincipal extends AppCompatActivity {
         return null;
     }
 
-    public void editorfg (View v){
-        EditardatosFG ed = new EditardatosFG();
-        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, ed).commit();
-    }
 
     public void replaceFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()

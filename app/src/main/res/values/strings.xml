@@ -62,4 +62,8 @@
     <string name="fecha">Fecha</string>
     <string name="mont">Monto</string>
     <string name="guardar">Guardar</string>
+    <string name="eliminar_producto">Eliminar Producto</string>
+    <string name="eliminar_product">Eliminar Producto</string>
+    <string name="selecciona_producto">Selecciona un producto</string>
+
 </resources>
