@@ -7,6 +7,7 @@ public class Producto {
     private double monto;
 
     public Producto() {
+        // Constructor vacío requerido para Firebase Firestore, si lo estás utilizando.
     }
 
     public Producto(String categoria, String detalle, String fecha, double monto) {

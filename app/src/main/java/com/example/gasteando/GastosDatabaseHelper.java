@@ -54,7 +54,6 @@ public class GastosDatabaseHelper extends SQLiteOpenHelper {
                 Log.e("DatabaseUpgrade", "Error adding column 'detalle': " + e.getMessage());
             }
         }
-        // Agrega más actualizaciones según sea necesario para futuras versiones.
     }
 
     public void updateData(String categoria, String detalle, String editedData, double monto) {
@@ -70,7 +69,7 @@ public class GastosDatabaseHelper extends SQLiteOpenHelper {
         List<Producto> listaProductos = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String query = "SELECT * FROM " + TABLE_GASTOS;  // Utiliza el nombre correcto de la tabla
+        String query = "SELECT * FROM " + TABLE_GASTOS;
         Cursor cursor = db.rawQuery(query, null);
 
         if (cursor != null) {
@@ -81,13 +80,15 @@ public class GastosDatabaseHelper extends SQLiteOpenHelper {
                     @SuppressLint("Range") String fecha = cursor.getString(cursor.getColumnIndex("fecha"));
                     @SuppressLint("Range") double monto = cursor.getDouble(cursor.getColumnIndex("monto"));
 
+                    // Imprimir registros para verificar si se obtienen datos
+                    Log.d("DatabaseQuery", "Categoria: " + categoria + ", Detalle: " + detalle + ", Fecha: " + fecha + ", Monto: " + monto);
+
                     Producto producto = new Producto(categoria, detalle, fecha, monto);
                     listaProductos.add(producto);
                 } while (cursor.moveToNext());
             }
             cursor.close();
         }
-
         db.close();
         return listaProductos;
     }

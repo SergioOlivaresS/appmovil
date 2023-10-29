@@ -26,7 +26,6 @@ public class IngresarproductosFG extends Fragment {
     private EditText etFecha, etDetalle, etMonto;
     private Spinner spinnerCategoria;
     private FirebaseFirestore db;
-
     private String userId;
 
     public IngresarproductosFG() {

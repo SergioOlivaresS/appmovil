@@ -7,28 +7,17 @@
     android:padding="16dp"
     tools:context=".EliminarProductoFG">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Eliminar Producto"
-        android:layout_marginBottom="16dp"/>
-
-    <Spinner
-        android:id="@+id/spinnerProductos"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewProductos"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:prompt="@string/selecciona_producto" />
+        android:layout_height="363dp"
+        android:layout_marginTop="76dp" />
 
     <Button
         android:id="@+id/btnEliminar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:text="@string/eliminar_product"
+        android:layout_marginTop="6dp"
+        android:text="Eliminar Producto"
         android:textColor="#FFFFFF" />
-
-
-
-
 </LinearLayout>
