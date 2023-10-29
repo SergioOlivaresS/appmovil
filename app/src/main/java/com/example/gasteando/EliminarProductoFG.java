@@ -144,16 +144,17 @@ public class EliminarProductoFG extends Fragment {
                                     // Borra el documento correspondiente
                                     db.collection("productos").document(document.getId()).delete();
                                 }
+
+                                // Limpia la selección después de eliminar los productos
+                                productosAdapter.clearSelectedItems();
+
+                                // Vuelve a cargar la lista de productos desde la base de datos y notifica al adaptador para actualizar
+                                obtenerProductosDesdeFirestore();
                             } else {
                                 Log.e("Firestore", "Error al eliminar datos: " + task.getException());
                             }
                         }
                     });
         }
-
-        // Limpia la selección después de eliminar los productos
-        productosAdapter.clearSelectedItems();
     }
-
-
 }
