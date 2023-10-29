@@ -104,7 +104,7 @@ public class ResumenFG extends Fragment {
     }
 
     private void setupPieChart(ArrayList<PieEntry> entries) {
-        PieDataSet dataSet = new PieDataSet(entries, "Gastos por Categoría");
+        PieDataSet dataSet = new PieDataSet(entries, "");
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         dataSet.setValueTextSize(16f);
 

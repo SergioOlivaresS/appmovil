@@ -13,14 +13,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
-        android:text="Resumen Gastos"
         android:textColor="#FFFCFC"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="32dp"/>
+        tools:layout_editor_absoluteY="32dp"
+        android:text="Resumen Gastos"
+        />
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/pieChart"
         android:layout_width="match_parent"
-        android:layout_height="590dp" />
+        android:layout_height="553dp" />
 
 </FrameLayout>

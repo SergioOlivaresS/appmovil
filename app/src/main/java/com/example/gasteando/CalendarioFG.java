@@ -34,15 +34,15 @@ public class CalendarioFG extends Fragment {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
 
-                // Llamar al método gastorealizadofg en la actividad MenuPrincipal y pasar la fecha seleccionada
-                if (getActivity() instanceof MenuPrincipal) {
-                    MenuPrincipal menuPrincipal = (MenuPrincipal) getActivity();
-
                     // Obtén la fecha seleccionada en el formato deseado (dayOfMonth, month, year)
                     String fechaSeleccionada = dayOfMonth + "/" + (month + 1) + "/" + year;
 
+                    if (getActivity() instanceof MenuPrincipal) {
+                        MenuPrincipal menuPrincipal = (MenuPrincipal) getActivity();
+                        menuPrincipal.setFechaSeleccionada(fechaSeleccionada);
+
                     // Busca el fragmento GastorealizadoFG en el contenedor
-                    GastorealizadoFG gastorealizadoFG = (GastorealizadoFG) getChildFragmentManager().findFragmentByTag("gastorealizado");
+                    GastorealizadoFG gastorealizadoFG = (GastorealizadoFG) getChildFragmentManager().findFragmentByTag("GastorealizadoFG");
 
                     if (gastorealizadoFG == null) {
                         // Si GastorealizadoFG no existe en el contenedor, créalo

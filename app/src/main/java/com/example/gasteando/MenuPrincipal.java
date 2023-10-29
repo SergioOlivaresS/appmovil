@@ -139,4 +139,17 @@ public class MenuPrincipal extends AppCompatActivity {
                 .addToBackStack(null)
                 .commit();
     }
+    public void setFechaSeleccionada(String fecha) {
+        // Obtener una referencia al fragmento GastorealizadoFG
+        GastorealizadoFG gastorealizadoFG = (GastorealizadoFG) getSupportFragmentManager().findFragmentByTag("gastorealizado");
+
+        if (gastorealizadoFG != null) {
+            gastorealizadoFG.setFechaSeleccionada(fecha);
+            // Reemplazar o actualizar el fragmento GastorealizadoFG con la fecha seleccionada
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contenedor, gastorealizadoFG)
+                    .commit();
+        }
+    }
 }
+

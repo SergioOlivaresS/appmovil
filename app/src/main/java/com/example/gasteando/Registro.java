@@ -58,6 +58,18 @@ public class Registro extends AppCompatActivity {
             return;
         }
 
+        // Agregar validaciones para el correo
+        if (!isValidEmail(correo)) {
+            Toast.makeText(this, "El correo electrónico no es válido", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Agregar validaciones para la contraseña
+        if (contrasenia.length() < 3) {
+            Toast.makeText(this, "La contraseña debe tener al menos 3 caracteres", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (!contrasenia.equals(confirmarContrasenia)) {
             Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
             return;
@@ -90,5 +102,10 @@ public class Registro extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("userID", userID);
         editor.apply();
+    }
+
+    private boolean isValidEmail(String email) {
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        return email.matches(emailPattern);
     }
 }

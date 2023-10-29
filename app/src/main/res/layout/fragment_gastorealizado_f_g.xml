@@ -4,6 +4,8 @@
     android:id="@+id/GastorealizadoFG"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="15dp"
+
     tools:context=".GastorealizadoFG">
 
     <!-- TODO: Update blank fragment layout -->
@@ -11,11 +13,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="5dp"
+        android:textColor="#FFFCFC"
+        tools:ignore="MissingConstraints"
         android:text="@string/gastos_realizados"
-        android:textColor="#FFFFFF"
-        tools:ignore="TextContrastCheck" />
+         />
 
     <EditText
         android:id="@+id/etFecha"
@@ -24,10 +25,12 @@
         android:layout_marginStart="-1dp"
         android:layout_marginTop="185dp"
         android:layout_marginEnd="2dp"
+        android:layout_marginLeft="10dp"
         android:autofillHints=""
         android:focusable="false"
         android:hint="@string/selecciona_una_fecha"
         android:inputType="datetime"
+
         android:minHeight="48dp"
         android:onClick="mostrarDatePicker"
         android:textColorHint="#8D6E63"

@@ -8,14 +8,14 @@
     tools:context=".MenuFG">
 
     <TextView
-        android:id="@+id/Menuprincipal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:text="@string/menu_principal_fg"
         android:textColor="#FFFCFC"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="17dp"
-        tools:layout_editor_absoluteY="30dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints,TextContrastCheck"
+        tools:layout_editor_absoluteY="54dp" />
 
     <Button
         android:id="@+id/ingresarproductos"
