@@ -1,16 +1,11 @@
 
 package com.example.gasteando;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GastosDatabaseHelper extends SQLiteOpenHelper {
 
@@ -54,43 +49,6 @@ public class GastosDatabaseHelper extends SQLiteOpenHelper {
                 Log.e("DatabaseUpgrade", "Error adding column 'detalle': " + e.getMessage());
             }
         }
-    }
-
-    public void updateData(String categoria, String detalle, String editedData, double monto) {
-    }
-
-    public void deleteData(Producto producto) {
-    }
-
-    public void eliminarProducto(Producto productoSeleccionado) {
-    }
-
-    public List<Producto> obtenerProductos() {
-        List<Producto> listaProductos = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        String query = "SELECT * FROM " + TABLE_GASTOS;
-        Cursor cursor = db.rawQuery(query, null);
-
-        if (cursor != null) {
-            if (cursor.moveToFirst()) {
-                do {
-                    @SuppressLint("Range") String categoria = cursor.getString(cursor.getColumnIndex("categoria"));
-                    @SuppressLint("Range") String detalle = cursor.getString(cursor.getColumnIndex("detalle"));
-                    @SuppressLint("Range") String fecha = cursor.getString(cursor.getColumnIndex("fecha"));
-                    @SuppressLint("Range") double monto = cursor.getDouble(cursor.getColumnIndex("monto"));
-
-                    // Imprimir registros para verificar si se obtienen datos
-                    Log.d("DatabaseQuery", "Categoria: " + categoria + ", Detalle: " + detalle + ", Fecha: " + fecha + ", Monto: " + monto);
-
-                    Producto producto = new Producto(categoria, detalle, fecha, monto);
-                    listaProductos.add(producto);
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-        }
-        db.close();
-        return listaProductos;
     }
 
 }

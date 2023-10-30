@@ -39,7 +39,6 @@ public class GastorealizadoFG extends Fragment {
     private String fechaSeleccionada;
 
     public GastorealizadoFG() {
-        // Required empty public constructor
     }
 
     // Método para configurar la fecha seleccionada
@@ -72,7 +71,6 @@ public class GastorealizadoFG extends Fragment {
             String categoria = spinnerCategoria.getSelectedItem().toString();
             double monto = 0;
 
-            // Inserta el gasto en la base de datos
             IngresarproductosFG ig = new IngresarproductosFG();
             FragmentManager fragmentManager = getParentFragmentManager();
             fragmentManager.beginTransaction()
@@ -85,7 +83,6 @@ public class GastorealizadoFG extends Fragment {
             String fechaSeleccionada = etFecha.getText().toString();
             String categoriaSeleccionada = spinnerCategoria.getSelectedItem().toString();
 
-            // Obten el ID del usuario almacenado en SharedPreferences
             SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserData", Context.MODE_PRIVATE);
             String userId = sharedPreferences.getString("userID", null);
 
@@ -93,12 +90,10 @@ public class GastorealizadoFG extends Fragment {
                 return;
             }
 
-            // Crea una consulta inicial con el filtro de fecha
             Query query = db.collection("productos")
                     .whereEqualTo("fecha", fechaSeleccionada)
                     .whereEqualTo("userId", userId);
 
-            // Verifica la categoría y ajusta la consulta si no es "Total"
             if (!categoriaSeleccionada.equals("Total")) {
                 query = query.whereEqualTo("categoria", categoriaSeleccionada);
             }
@@ -129,7 +124,6 @@ public class GastorealizadoFG extends Fragment {
         });
 
         btnEliminarProducto.setOnClickListener(v -> {
-            // Reemplaza el fragmento actual con el fragmento de eliminación
             EliminarProductoFG eliminarProductoFG = new EliminarProductoFG();
             FragmentManager fragmentManager = getParentFragmentManager();
             fragmentManager.beginTransaction()
@@ -174,8 +168,4 @@ public class GastorealizadoFG extends Fragment {
         this.dbHelper = dbHelper;
     }
 
-    // Método para eliminar el producto seleccionado
-    private void eliminarProductoSeleccionado() {
-        // Realiza aquí la lógica para eliminar el producto seleccionado.
-    }
 }

@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Inicializar Firebase Authentication y Firestore
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
     }
@@ -47,11 +46,9 @@ public class MainActivity extends AppCompatActivity {
                             Intent i = new Intent(this, MenuPrincipal.class);
                             startActivity(i);
                         } else {
-                            // Credenciales incorrectas o usuario no encontrado
                             Toast.makeText(this, "Credenciales incorrectas o usuario no encontrado", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        // Error en la consulta a Firestore
                         Toast.makeText(this, "Error al consultar Firestore", Toast.LENGTH_SHORT).show();
                     }
                 });

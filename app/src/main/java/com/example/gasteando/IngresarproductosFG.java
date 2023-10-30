@@ -34,7 +34,6 @@ public class IngresarproductosFG extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Inicializar Firestore
         db = FirebaseFirestore.getInstance();
 
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserData", Context.MODE_PRIVATE);

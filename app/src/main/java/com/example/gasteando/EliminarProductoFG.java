@@ -45,10 +45,8 @@ public class EliminarProductoFG extends Fragment {
 
         recyclerViewProductos.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        // Obtén los productos de Firestore y llénalos en listaProductos
         obtenerProductosDesdeFirestore();
 
-        // Configurar el adaptador
         productosAdapter = new ProductosAdapter(listaProductos);
         recyclerViewProductos.setAdapter(productosAdapter);
 
@@ -58,10 +56,8 @@ public class EliminarProductoFG extends Fragment {
     }
 
     private void obtenerProductosDesdeFirestore() {
-        // Obtiene una instancia de la base de datos de Firestore
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        // Obten el ID del usuario almacenado en SharedPreferences
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserData", Context.MODE_PRIVATE);
         String userId = sharedPreferences.getString("userID", null);
 
@@ -69,7 +65,6 @@ public class EliminarProductoFG extends Fragment {
             return;
         }
 
-        // Realiza una consulta a Firestore para obtener los productos del usuario actual
         CollectionReference productosRef = db.collection("productos");
 
         productosRef
@@ -113,13 +108,10 @@ public class EliminarProductoFG extends Fragment {
             return;
         }
 
-        // Obtiene los productos seleccionados a eliminar del adaptador
         List<Producto> productosSeleccionados = productosAdapter.getSelectedItems();
 
-        // Obtiene una instancia de la base de datos de Firestore
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        // Obten el ID del usuario almacenado en SharedPreferences
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserData", Context.MODE_PRIVATE);
         String userId = sharedPreferences.getString("userID", null);
 
@@ -127,7 +119,6 @@ public class EliminarProductoFG extends Fragment {
             return;
         }
 
-        // Realiza la eliminación de los productos seleccionados en Firestore
         for (Producto producto : productosSeleccionados) {
             db.collection("productos")
                     .whereEqualTo("categoria", producto.getCategoria())

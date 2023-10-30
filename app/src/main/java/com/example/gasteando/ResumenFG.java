@@ -47,7 +47,6 @@ public class ResumenFG extends Fragment {
     }
 
     private void fetchAndSetupPieChart() {
-        // Realiza una consulta a Firestore para obtener los datos de gasto
         db.collection("productos")
                 .whereEqualTo("userId", userId) // Filtra por el ID de usuario
                 .get()
@@ -61,7 +60,6 @@ public class ResumenFG extends Fragment {
     }
 
     private ArrayList<PieEntry> processGastoData(QuerySnapshot queryDocumentSnapshots) {
-        // Calcula los totales por categoría
         double totalAlimentacion = 0.0;
         double totalTransporte = 0.0;
         double totalEntretenimiento = 0.0;
@@ -89,7 +87,6 @@ public class ResumenFG extends Fragment {
             }
         }
 
-        // Calcula los porcentajes
         double totalGastos = totalAlimentacion + totalTransporte + totalEntretenimiento + totalOtros;
 
         ArrayList<PieEntry> entries = new ArrayList<>();

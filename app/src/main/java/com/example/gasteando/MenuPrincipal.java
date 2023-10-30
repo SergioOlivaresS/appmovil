@@ -22,25 +22,21 @@ public class MenuPrincipal extends AppCompatActivity {
         tl.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                //codificar tap al tocar
                 int position = tab.getPosition();
                 switch (position) {
                     case 0:
                         MenuFG m = new MenuFG();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,m).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, m).commit();
                         break;
                     case 1:
-                        //llamar al fragmento resumen
                         ResumenFG h = new ResumenFG();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,h).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, h).commit();
                         break;
                     case 2:
-                        // llamar a categoria
                         CategoriaFG c = new CategoriaFG();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,c).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, c).commit();
                         break;
                     case 3:
-                        // Devolver al fragmento MenuFG
                         MenuFG menuFragment = new MenuFG();
                         getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, menuFragment).commit();
                         break;
@@ -51,94 +47,86 @@ public class MenuPrincipal extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                // codificar tap al dejar de tocar
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                //cuando se vuelve a seleccionar
                 int position = tab.getPosition();
                 switch (position) {
                     case 0:
                         MenuFG m = new MenuFG();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,m).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, m).commit();
                         break;
                     case 1:
-                        //llamar al fragmento resumen
                         ResumenFG h = new ResumenFG();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,h).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, h).commit();
                         break;
                     case 2:
-                        // llamar a categoria
                         CategoriaFG c = new CategoriaFG();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,c).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, c).commit();
                         break;
                     case 3:
-                        // Devolver al fragmento MenuFG
                         MenuFG menuFragment = new MenuFG();
                         getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, menuFragment).commit();
                         break;
-
                 }
-
             }
         });
 
-        // Cargar el fragmento MenuFG al iniciar la actividad
         MenuFG m = new MenuFG();
         getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, m).commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Obtén el fragmento actual en el contenedor
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.contenedor);
+
+        if (currentFragment instanceof GastorealizadoFG) {
+            MenuFG menuFragment = new MenuFG();
+            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, menuFragment).commit();
+        } else {
+            super.onBackPressed(); // Comportamiento predeterminado para otros fragmentos
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         return super.onCreateOptionsMenu(menu);
     }
+
     public void ingresarproductosfg(View v) {
         IngresarproductosFG ig = new IngresarproductosFG();
-        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, ig).commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.contenedor, ig)
+                .addToBackStack(null)
+                .commit();
     }
 
-    public void gastorealizadofg (View v) {
+    public void gastorealizadofg(View v) {
         GastorealizadoFG gr = new GastorealizadoFG();
-        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, gr).commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.contenedor, gr)
+                .addToBackStack(null)
+                .commit();
     }
 
     public void calendariofg(View v) {
         CalendarioFG cl = new CalendarioFG();
-        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, cl).commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.contenedor, cl)
+                .addToBackStack(null)
+                .commit();
     }
 
     public void comparadorfg(View v) {
         CompararGastosFG cg = new CompararGastosFG();
-        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, cg).commit();
-    }
-
-    public void menu(View v) {
-        MenuFG m = new MenuFG();
-        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,m).commit();
-    }
-
-    public void gastorealizadocalendario(String fechaSeleccionada) {
-
-        GastorealizadoFG gastorealizadoFragment = new GastorealizadoFG();
-        Bundle args = new Bundle();
-        args.putString("fechaSeleccionada", fechaSeleccionada);
-        gastorealizadoFragment.setArguments(args);
-        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, gastorealizadoFragment).commit();
-    }
-
-    public GastosDatabaseHelper getDbHelper() {
-        return null;
-    }
-
-
-    public void replaceFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.contenedor, fragment)
+                .replace(R.id.contenedor, cg)
                 .addToBackStack(null)
                 .commit();
     }
+
     public void setFechaSeleccionada(String fecha) {
         // Obtener una referencia al fragmento GastorealizadoFG
         GastorealizadoFG gastorealizadoFG = (GastorealizadoFG) getSupportFragmentManager().findFragmentByTag("gastorealizado");
@@ -152,4 +140,3 @@ public class MenuPrincipal extends AppCompatActivity {
         }
     }
 }
-
