@@ -43,7 +43,6 @@ public class CompararGastosFG extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_comparar_gastos_f_g, container, false);
 
-
         etFechaInicio = rootView.findViewById(R.id.etFechaInicio);
         etFechaFin = rootView.findViewById(R.id.etFechaFin);
         Button btnMostrarDatos = rootView.findViewById(R.id.btnMostrarDatos);
@@ -52,8 +51,8 @@ public class CompararGastosFG extends Fragment {
         db = FirebaseFirestore.getInstance();
 
         // Configurar el Spinner con categorías
-        String[] categorias = {"Total", "Alimentación", "Entretenimiento", "Transporte", "Otro"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, categorias);
+        String[] categorías = {"Total", "Alimentación", "Entretenimiento", "Transporte", "Otro"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, categorías);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCategoria.setAdapter(adapter);
 
@@ -68,7 +67,7 @@ public class CompararGastosFG extends Fragment {
             btnMostrarDatos.setEnabled(false);
             etFechaInicio.setEnabled(false);
             etFechaFin.setEnabled(false);
-            spinnerCategoria.setEnabled(false); // Agregado
+            spinnerCategoria.setEnabled(false);
         }
 
         btnMostrarDatos.setOnClickListener(v -> mostrarDatos());
@@ -81,28 +80,30 @@ public class CompararGastosFG extends Fragment {
     }
 
     private void mostrarDatePickerInicio() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
         DatePickerDialog datePickerDialog = new DatePickerDialog(
-                requireContext(), (view, year, month, dayOfMonth) -> {
-            fechaInicio.set(year, month, dayOfMonth);
+                requireContext(), (view, year1, month1, dayOfMonth1) -> {
+            fechaInicio.set(year1, month1, dayOfMonth1);
             updateFechaEditTexts();
-        },
-                fechaInicio.get(Calendar.YEAR),
-                fechaInicio.get(Calendar.MONTH),
-                fechaInicio.get(Calendar.DAY_OF_MONTH)
-        );
+        }, year, month, dayOfMonth);
         datePickerDialog.show();
     }
 
     private void mostrarDatePickerFin() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
         DatePickerDialog datePickerDialog = new DatePickerDialog(
-                requireContext(), (view, year, month, dayOfMonth) -> {
-            fechaFin.set(year, month, dayOfMonth);
+                requireContext(), (view, year1, month1, dayOfMonth1) -> {
+            fechaFin.set(year1, month1, dayOfMonth1);
             updateFechaEditTexts();
-        },
-                fechaFin.get(Calendar.YEAR),
-                fechaFin.get(Calendar.MONTH),
-                fechaFin.get(Calendar.DAY_OF_MONTH)
-        );
+        }, year, month, dayOfMonth);
         datePickerDialog.show();
     }
 
@@ -128,7 +129,6 @@ public class CompararGastosFG extends Fragment {
                 .whereLessThanOrEqualTo("fecha", fechaFinStr)
                 .whereEqualTo("userId", userId);
 
-        // Agregar el filtro por categoría si no es "Total"
         if (!categoriaSeleccionada.equals("Total")) {
             totalQuery = totalQuery.whereEqualTo("categoria", categoriaSeleccionada);
         }
